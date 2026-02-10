@@ -1,0 +1,35 @@
+/**
+ * ProxyVaultPro - Ocean Theme
+ * Deep sea blues and teals
+ */
+
+[data-theme="ocean"] {
+    --bg-primary: #0c1929;
+    --bg-secondary: #112240;
+    --bg-tertiary: #1a3050;
+
+    --text-primary: #e6f1ff;
+    --text-secondary: #8892b0;
+    --text-tertiary: #607090;
+
+    --primary: #0ea5e9;
+    --primary-light: #38bdf8;
+    --primary-dark: #0284c7;
+    --primary-glow: rgba(14, 165, 233, 0.3);
+
+    --accent: #14b8a6;
+    --accent-light: #2dd4bf;
+
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #f43f5e;
+    --info: #06b6d4;
+
+    --border-color: rgba(14, 165, 233, 0.2);
+
+    --glass-bg: rgba(17, 34, 64, 0.9);
+    --glass-border: rgba(14, 165, 233, 0.2);
+    --glass-blur: 12px;
+
+    --particle-color: rgba(14, 165, 233, 0.5);
+}

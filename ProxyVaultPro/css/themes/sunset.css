@@ -1,0 +1,35 @@
+/**
+ * ProxyVaultPro - Sunset Theme
+ * Warm oranges and sunset colors
+ */
+
+[data-theme="sunset"] {
+    --bg-primary: #1a0f0a;
+    --bg-secondary: #2a1810;
+    --bg-tertiary: #3a2218;
+
+    --text-primary: #fff5f0;
+    --text-secondary: #d0a090;
+    --text-tertiary: #906050;
+
+    --primary: #f97316;
+    --primary-light: #fb923c;
+    --primary-dark: #ea580c;
+    --primary-glow: rgba(249, 115, 22, 0.3);
+
+    --accent: #fbbf24;
+    --accent-light: #fcd34d;
+
+    --success: #22c55e;
+    --warning: #facc15;
+    --danger: #ef4444;
+    --info: #f59e0b;
+
+    --border-color: rgba(249, 115, 22, 0.2);
+
+    --glass-bg: rgba(42, 24, 16, 0.9);
+    --glass-border: rgba(249, 115, 22, 0.2);
+    --glass-blur: 12px;
+
+    --particle-color: rgba(249, 115, 22, 0.5);
+}

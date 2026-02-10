@@ -1,0 +1,35 @@
+/**
+ * ProxyVaultPro - Midnight Theme
+ * Deep purples and violet
+ */
+
+[data-theme="midnight"] {
+    --bg-primary: #0d0a1a;
+    --bg-secondary: #150f2a;
+    --bg-tertiary: #1f1640;
+
+    --text-primary: #f0e8ff;
+    --text-secondary: #b0a0d0;
+    --text-tertiary: #706090;
+
+    --primary: #8b5cf6;
+    --primary-light: #a78bfa;
+    --primary-dark: #7c3aed;
+    --primary-glow: rgba(139, 92, 246, 0.3);
+
+    --accent: #c084fc;
+    --accent-light: #d8b4fe;
+
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #f43f5e;
+    --info: #a855f7;
+
+    --border-color: rgba(139, 92, 246, 0.2);
+
+    --glass-bg: rgba(21, 15, 42, 0.9);
+    --glass-border: rgba(139, 92, 246, 0.2);
+    --glass-blur: 12px;
+
+    --particle-color: rgba(139, 92, 246, 0.5);
+}

@@ -1,0 +1,42 @@
+/**
+ * ProxyVaultPro - Dark Theme (Default)
+ * Deep dark with purple/indigo accents
+ */
+
+[data-theme="dark"] {
+    /* Background Colors */
+    --bg-primary: #0f0f23;
+    --bg-secondary: #1a1a2e;
+    --bg-tertiary: #25253a;
+
+    /* Text Colors */
+    --text-primary: #f0f0f5;
+    --text-secondary: #a0a0b0;
+    --text-tertiary: #6b6b80;
+
+    /* Brand Colors */
+    --primary: #6366f1;
+    --primary-light: #818cf8;
+    --primary-dark: #4f46e5;
+    --primary-glow: rgba(99, 102, 241, 0.3);
+
+    --accent: #a855f7;
+    --accent-light: #c084fc;
+
+    /* Semantic Colors */
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #3b82f6;
+
+    /* Border */
+    --border-color: rgba(255, 255, 255, 0.1);
+
+    /* Glass Morphism */
+    --glass-bg: rgba(26, 26, 46, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-blur: 12px;
+
+    /* Particle Theme */
+    --particle-color: rgba(99, 102, 241, 0.6);
+}

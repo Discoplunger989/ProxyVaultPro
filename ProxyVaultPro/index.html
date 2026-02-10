@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ProxyVaultPro - Advanced Proxy Management System with enterprise-grade features">
+    <meta name="theme-color" content="#0f0f23">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.svg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+    <title>ProxyVaultPro - Advanced Proxy Management</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/particles.css">
+
+    <!-- Theme (default dark, dynamically switched) -->
+    <link rel="stylesheet" href="css/themes/dark.css" id="theme-stylesheet">
+</head>
+
+<body>
+    <!-- Particle Canvas Background -->
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <!-- App Container -->
+    <div id="app" class="app-container">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="loading-screen">
+            <div class="loading-content">
+                <div class="loading-logo">
+                    <svg viewBox="0 0 64 64" class="logo-svg">
+                        <defs>
+                            <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:var(--primary);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:var(--accent);stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="32" cy="32" r="28" fill="none" stroke="url(#logo-gradient)" stroke-width="3" />
+                        <path d="M24 20 L40 32 L24 44 Z" fill="url(#logo-gradient)" />
+                    </svg>
+                </div>
+                <h1 class="loading-title">ProxyVaultPro</h1>
+                <div class="loading-spinner">
+                    <div class="spinner-ring"></div>
+                </div>
+                <p class="loading-text">Initializing system...</p>
+            </div>
+        </div>
+
+        <!-- Login View -->
+        <div id="login-view" class="view login-view hidden">
+            <div class="login-container">
+                <div class="login-card glass-card">
+                    <div class="login-header">
+                        <div class="login-logo">
+                            <svg viewBox="0 0 64 64" class="logo-svg">
+                                <defs>
+                                    <linearGradient id="login-logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:var(--primary);stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:var(--accent);stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="32" cy="32" r="28" fill="none" stroke="url(#login-logo-gradient)"
+                                    stroke-width="3" />
+                                <path d="M24 20 L40 32 L24 44 Z" fill="url(#login-logo-gradient)" />
+                            </svg>
+                        </div>
+                        <h1>ProxyVaultPro</h1>
+                        <p class="subtitle">Advanced Proxy Management System</p>
+                    </div>
+
+                    <form id="login-form" class="login-form">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <div class="input-wrapper">
+                                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg>
+                                <input type="text" id="username" name="username" placeholder="Enter username" required
+                                    autocomplete="username">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="input-wrapper">
+                                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                                <input type="password" id="password" name="password" placeholder="Enter password"
+                                    required autocomplete="current-password">
+                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                                    <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                        <circle cx="12" cy="12" r="3" />
+                                    </svg>
+                                    <svg class="eye-closed hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                                        <line x1="1" y1="1" x2="23" y2="23" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="checkbox-wrapper">
+                                <input type="checkbox" id="remember-me" name="remember">
+                                <span class="checkmark"></span>
+                                <span>Remember me</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>Sign In</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </form>
+
+                    <div class="login-footer">
+                        <p class="credentials-hint">Default: <code>user</code> / <code>user123</code> or
+                            <code>admin</code> / <code>admin123</code>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main App View (User Dashboard) -->
+        <div id="user-view" class="view user-view hidden">
+            <!-- Navigation -->
+            <nav id="navbar" class="navbar glass-nav">
+                <div class="nav-brand">
+                    <svg viewBox="0 0 64 64" class="nav-logo">
+                        <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="3" />
+                        <path d="M24 20 L40 32 L24 44 Z" fill="currentColor" />
+                    </svg>
+                    <span class="brand-text">ProxyVaultPro</span>
+                </div>
+
+                <div class="nav-search" id="nav-search">
+                    <div class="search-wrapper">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="M21 21l-4.35-4.35" />
+                        </svg>
+                        <input type="text" id="search-input" placeholder="Search proxies..." autocomplete="off">
+                        <button type="button" class="search-clear hidden" aria-label="Clear search">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="nav-actions">
+                    <button class="nav-btn" id="filter-btn" aria-label="Filter proxies">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                        </svg>
+                    </button>
+                    <button class="nav-btn" id="report-btn" aria-label="Report blocked site">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                            <line x1="4" y1="22" x2="4" y2="15" />
+                        </svg>
+                    </button>
+                    <button class="nav-btn" id="theme-toggle-btn" aria-label="Change theme">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg>
+                    </button>
+                    <div class="user-menu">
+                        <button class="user-btn" id="user-menu-btn">
+                            <div class="user-avatar" id="user-avatar">U</div>
+                            <span class="user-name" id="user-name">User</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </button>
+                        <div class="dropdown-menu" id="user-dropdown">
+                            <a href="#" class="dropdown-item" id="admin-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3" />
+                                    <path
+                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                                </svg>
+                                Admin Panel
+                            </a>
+                            <a href="#" class="dropdown-item" id="export-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                Export Proxies
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-danger" id="logout-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                    <polyline points="16 17 21 12 16 7" />
+                                    <line x1="21" y1="12" x2="9" y2="12" />
+                                </svg>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Filter Panel -->
+            <div id="filter-panel" class="filter-panel hidden">
+                <div class="filter-content glass-card">
+                    <div class="filter-header">
+                        <h3>Filter Proxies</h3>
+                        <button class="close-btn" id="close-filter">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="filter-body">
+                        <div class="filter-group">
+                            <label>Sort by</label>
+                            <select id="sort-select" class="form-select">
+                                <option value="name-asc">Name (A-Z)</option>
+                                <option value="name-desc">Name (Z-A)</option>
+                                <option value="date-newest">Date Added (Newest)</option>
+                                <option value="date-oldest">Date Added (Oldest)</option>
+                                <option value="access-most">Most Accessed</option>
+                                <option value="access-least">Least Accessed</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Tags</label>
+                            <div id="tag-filters" class="tag-filters"></div>
+                        </div>
+                        <div class="filter-group">
+                            <label class="checkbox-wrapper">
+                                <input type="checkbox" id="favorites-only">
+                                <span class="checkmark"></span>
+                                <span>Favorites only</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="filter-footer">
+                        <button class="btn btn-ghost" id="clear-filters">Clear All</button>
+                        <button class="btn btn-primary" id="apply-filters">Apply Filters</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="content-header">
+                    <div class="header-left">
+                        <h2>Proxy Links</h2>
+                        <span class="proxy-count" id="proxy-count">0 proxies</span>
+                    </div>
+                    <div class="header-actions">
+                        <div class="view-toggle">
+                            <button class="view-btn active" id="grid-view-btn" aria-label="Grid view">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="7" height="7" />
+                                    <rect x="14" y="3" width="7" height="7" />
+                                    <rect x="14" y="14" width="7" height="7" />
+                                    <rect x="3" y="14" width="7" height="7" />
+                                </svg>
+                            </button>
+                            <button class="view-btn" id="list-view-btn" aria-label="List view">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="8" y1="6" x2="21" y2="6" />
+                                    <line x1="8" y1="12" x2="21" y2="12" />
+                                    <line x1="8" y1="18" x2="21" y2="18" />
+                                    <line x1="3" y1="6" x2="3.01" y2="6" />
+                                    <line x1="3" y1="12" x2="3.01" y2="12" />
+                                    <line x1="3" y1="18" x2="3.01" y2="18" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proxy Grid/List Container -->
+                <div id="proxy-container" class="proxy-grid"></div>
+
+                <!-- Empty State -->
+                <div id="empty-state" class="empty-state hidden">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                        <polyline points="13 2 13 9 20 9" />
+                    </svg>
+                    <h3>No proxies found</h3>
+                    <p>Try adjusting your search or filters</p>
+                </div>
+            </main>
+        </div>
+
+        <!-- Admin View -->
+        <div id="admin-view" class="view admin-view hidden">
+            <!-- Admin Sidebar -->
+            <aside id="admin-sidebar" class="admin-sidebar">
+                <div class="sidebar-header">
+                    <svg viewBox="0 0 64 64" class="sidebar-logo">
+                        <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="3" />
+                        <path d="M24 20 L40 32 L24 44 Z" fill="currentColor" />
+                    </svg>
+                    <span>Admin</span>
+                    <button class="sidebar-close" id="sidebar-close">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <a href="#" class="sidebar-link active" data-panel="proxies">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                        </svg>
+                        <span>Proxy Manager</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-panel="security">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                        <span>Security</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-panel="themes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="13.5" cy="6.5" r="2.5" />
+                            <circle cx="6" cy="12" r="2.5" />
+                            <circle cx="18" cy="12" r="2.5" />
+                            <circle cx="8.5" cy="18.5" r="2.5" />
+                            <circle cx="17.5" cy="18.5" r="2.5" />
+                        </svg>
+                        <span>Themes</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-panel="particles">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="2" />
+                            <circle cx="6" cy="6" r="1" />
+                            <circle cx="18" cy="6" r="1" />
+                            <circle cx="6" cy="18" r="1" />
+                            <circle cx="18" cy="18" r="1" />
+                            <circle cx="3" cy="12" r="1" />
+                            <circle cx="21" cy="12" r="1" />
+                        </svg>
+                        <span>Particles</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-panel="system">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                        </svg>
+                        <span>System Tools</span>
+                    </a>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <a href="#" class="sidebar-link" id="back-to-dashboard">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12" />
+                            <polyline points="12 19 5 12 12 5" />
+                        </svg>
+                        <span>Back to Dashboard</span>
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Admin Main Content -->
+            <main class="admin-main">
+                <header class="admin-header">
+                    <button class="sidebar-toggle" id="sidebar-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12" />
+                            <line x1="3" y1="6" x2="21" y2="6" />
+                            <line x1="3" y1="18" x2="21" y2="18" />
+                        </svg>
+                    </button>
+                    <h1 id="admin-panel-title">Proxy Manager</h1>
+                </header>
+
+                <!-- Admin Panels -->
+                <div class="admin-panels">
+                    <!-- Proxy Manager Panel -->
+                    <div id="proxies-panel" class="admin-panel active">
+                        <div class="panel-header">
+                            <div class="panel-actions">
+                                <button class="btn btn-primary" id="add-proxy-btn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    Add Proxy
+                                </button>
+                                <button class="btn btn-ghost" id="import-proxies-btn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                        <polyline points="17 8 12 3 7 8" />
+                                        <line x1="12" y1="3" x2="12" y2="15" />
+                                    </svg>
+                                    Import
+                                </button>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div id="admin-proxy-list" class="admin-proxy-list"></div>
+                        </div>
+                    </div>
+
+                    <!-- Security Panel -->
+                    <div id="security-panel" class="admin-panel">
+                        <div class="panel-content">
+                            <div class="settings-section">
+                                <h3>Password Settings</h3>
+                                <div class="settings-grid">
+                                    <div class="settings-card glass-card">
+                                        <h4>Change Admin Password</h4>
+                                        <form id="admin-password-form" class="settings-form">
+                                            <div class="form-group">
+                                                <label for="current-admin-password">Current Password</label>
+                                                <input type="password" id="current-admin-password" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="new-admin-password">New Password</label>
+                                                <input type="password" id="new-admin-password" required minlength="6">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="confirm-admin-password">Confirm Password</label>
+                                                <input type="password" id="confirm-admin-password" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Update Password</button>
+                                        </form>
+                                    </div>
+
+                                    <div class="settings-card glass-card">
+                                        <h4>Change User Password</h4>
+                                        <form id="user-password-form" class="settings-form">
+                                            <div class="form-group">
+                                                <label for="new-user-password">New User Password</label>
+                                                <input type="password" id="new-user-password" required minlength="6">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="confirm-user-password">Confirm Password</label>
+                                                <input type="password" id="confirm-user-password" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Update User Password</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-section">
+                                <h3>Session Settings</h3>
+                                <div class="settings-card glass-card">
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <h4>Session Timeout</h4>
+                                            <p>Automatically log out after inactivity</p>
+                                        </div>
+                                        <select id="session-timeout" class="form-select">
+                                            <option value="0">Never</option>
+                                            <option value="15">15 minutes</option>
+                                            <option value="30">30 minutes</option>
+                                            <option value="60">1 hour</option>
+                                            <option value="120">2 hours</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Themes Panel -->
+                    <div id="themes-panel" class="admin-panel">
+                        <div class="panel-content">
+                            <div class="settings-section">
+                                <h3>Select Theme</h3>
+                                <div id="theme-grid" class="theme-grid"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Particles Panel -->
+                    <div id="particles-panel" class="admin-panel">
+                        <div class="panel-content">
+                            <div class="settings-section">
+                                <div class="setting-row">
+                                    <div class="setting-info">
+                                        <h3>Particle Effects</h3>
+                                        <p>Enable animated background particles</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="particles-enabled">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="settings-section" id="particle-options">
+                                <h3>Particle Preset</h3>
+                                <div id="particle-presets" class="preset-grid"></div>
+
+                                <div class="settings-section">
+                                    <h3>Particle Settings</h3>
+                                    <div class="settings-card glass-card">
+                                        <div class="setting-row">
+                                            <label for="particle-count">Particle Count</label>
+                                            <input type="range" id="particle-count" min="10" max="200" value="50">
+                                            <span id="particle-count-value">50</span>
+                                        </div>
+                                        <div class="setting-row">
+                                            <label for="particle-speed">Speed</label>
+                                            <input type="range" id="particle-speed" min="1" max="10" value="3">
+                                            <span id="particle-speed-value">3</span>
+                                        </div>
+                                        <div class="setting-row">
+                                            <label for="particle-size">Size</label>
+                                            <input type="range" id="particle-size" min="1" max="10" value="3">
+                                            <span id="particle-size-value">3</span>
+                                        </div>
+                                        <div class="setting-row">
+                                            <label for="particle-opacity">Opacity</label>
+                                            <input type="range" id="particle-opacity" min="1" max="10" value="5">
+                                            <span id="particle-opacity-value">0.5</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Tools Panel -->
+                    <div id="system-panel" class="admin-panel">
+                        <div class="panel-content">
+                            <div class="settings-section">
+                                <h3>Data Management</h3>
+                                <div class="settings-grid">
+                                    <div class="settings-card glass-card">
+                                        <h4>Backup Data</h4>
+                                        <p>Export all proxies and settings to a JSON file</p>
+                                        <button class="btn btn-primary" id="backup-btn">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                                <polyline points="7 10 12 15 17 10" />
+                                                <line x1="12" y1="15" x2="12" y2="3" />
+                                            </svg>
+                                            Create Backup
+                                        </button>
+                                    </div>
+
+                                    <div class="settings-card glass-card">
+                                        <h4>Restore Data</h4>
+                                        <p>Import data from a backup file</p>
+                                        <input type="file" id="restore-file" accept=".json" class="hidden">
+                                        <button class="btn btn-ghost" id="restore-btn">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                                <polyline points="17 8 12 3 7 8" />
+                                                <line x1="12" y1="3" x2="12" y2="15" />
+                                            </svg>
+                                            Restore Backup
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-section">
+                                <h3>Danger Zone</h3>
+                                <div class="settings-card glass-card danger-zone">
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <h4>Reset All Data</h4>
+                                            <p>This will delete all proxies and reset settings to defaults. This action
+                                                cannot be undone.</p>
+                                        </div>
+                                        <button class="btn btn-danger" id="reset-all-btn">Reset Everything</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Container -->
+    <div id="modal-container"></div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Theme Picker Popup -->
+    <div id="theme-picker" class="theme-picker hidden">
+        <div class="theme-picker-content glass-card">
+            <div class="theme-picker-header">
+                <h3>Choose Theme</h3>
+                <button class="close-btn" id="close-theme-picker">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <div id="theme-picker-grid" class="theme-picker-grid"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>

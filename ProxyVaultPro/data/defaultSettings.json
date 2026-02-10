@@ -1,0 +1,11 @@
+{
+    "theme": "dark",
+    "particlesEnabled": true,
+    "particlePreset": "stars",
+    "particleCount": 50,
+    "particleSpeed": 3,
+    "particleSize": 3,
+    "particleOpacity": 0.5,
+    "sessionTimeout": 0,
+    "viewMode": "grid"
+}

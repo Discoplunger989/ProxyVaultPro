@@ -1,0 +1,35 @@
+/**
+ * ProxyVaultPro - Retro Theme
+ * 80s synthwave nostalgia
+ */
+
+[data-theme="retro"] {
+    --bg-primary: #1a0a2e;
+    --bg-secondary: #2d1b4e;
+    --bg-tertiary: #3d2868;
+
+    --text-primary: #fff0ff;
+    --text-secondary: #d0a0e0;
+    --text-tertiary: #906090;
+
+    --primary: #ff6b9d;
+    --primary-light: #ff8fb5;
+    --primary-dark: #e04880;
+    --primary-glow: rgba(255, 107, 157, 0.4);
+
+    --accent: #ffd93d;
+    --accent-light: #ffe566;
+
+    --success: #4ade80;
+    --warning: #ffd93d;
+    --danger: #ff4757;
+    --info: #17c0eb;
+
+    --border-color: rgba(255, 107, 157, 0.3);
+
+    --glass-bg: rgba(45, 27, 78, 0.9);
+    --glass-border: rgba(255, 107, 157, 0.2);
+    --glass-blur: 12px;
+
+    --particle-color: rgba(255, 107, 157, 0.5);
+}

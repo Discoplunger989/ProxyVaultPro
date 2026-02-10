@@ -1,0 +1,35 @@
+/**
+ * ProxyVaultPro - Minimal Theme
+ * Clean, distraction-free design
+ */
+
+[data-theme="minimal"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #242424;
+    --bg-tertiary: #2e2e2e;
+
+    --text-primary: #e5e5e5;
+    --text-secondary: #a3a3a3;
+    --text-tertiary: #737373;
+
+    --primary: #f5f5f5;
+    --primary-light: #ffffff;
+    --primary-dark: #d4d4d4;
+    --primary-glow: rgba(245, 245, 245, 0.15);
+
+    --accent: #737373;
+    --accent-light: #a3a3a3;
+
+    --success: #4ade80;
+    --warning: #fbbf24;
+    --danger: #f87171;
+    --info: #60a5fa;
+
+    --border-color: rgba(255, 255, 255, 0.1);
+
+    --glass-bg: rgba(36, 36, 36, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-blur: 12px;
+
+    --particle-color: rgba(255, 255, 255, 0.3);
+}

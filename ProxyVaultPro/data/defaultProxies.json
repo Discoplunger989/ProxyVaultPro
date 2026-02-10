@@ -1,0 +1,53 @@
+[
+    {
+        "name": "Ultraviolet",
+        "url": "https://github.com/nicoangelico/ultraviolet",
+        "description": "A highly sophisticated proxy service with multiple security features",
+        "tags": [
+            "web",
+            "secure",
+            "popular"
+        ],
+        "favorite": true
+    },
+    {
+        "name": "Rammerhead",
+        "url": "https://rammerhead.org",
+        "description": "Session-based proxy with excellent performance",
+        "tags": [
+            "fast",
+            "session-based"
+        ],
+        "favorite": false
+    },
+    {
+        "name": "Scramjet",
+        "url": "https://scramjet.dev",
+        "description": "Modern web proxy with advanced URL rewriting",
+        "tags": [
+            "modern",
+            "web"
+        ],
+        "favorite": true
+    },
+    {
+        "name": "Meteor",
+        "url": "https://meteor-proxy.com",
+        "description": "Lightweight proxy solution for everyday browsing",
+        "tags": [
+            "lightweight",
+            "simple"
+        ],
+        "favorite": false
+    },
+    {
+        "name": "Nebula",
+        "url": "https://nebula-proxy.io",
+        "description": "Community-driven proxy platform",
+        "tags": [
+            "community",
+            "open-source"
+        ],
+        "favorite": false
+    }
+]
